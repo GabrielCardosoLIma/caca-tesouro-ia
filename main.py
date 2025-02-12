@@ -5,7 +5,7 @@ def mapa_json(arquivo):  # função para ler o mapa de um arquivo JSON
         dados = json.load(f)  
         return dados["mapa"]  # Retorna o mapa
 
-mapa = mapa_json("mapa.json")  # Chama a função para ler o mapa do arquivo "mapa.json"
+mapa = mapa_json("mapa.json") #função para ler o mapa do arquivo "mapa.json"
 
 def encontrar_posicao(Mapa, X):  # função para encontrar a posição de um elemento no mapa
     for i in range(len(mapa)):  # linhas 
@@ -20,12 +20,6 @@ def mostrar_mapa(mapa):  # função para exibir o mapa
 def busca_largura(mapa, inicio, objetivo):  # função para realizar a busca em largura
 
 
-direcoes = {  # Define um dicionário com as direções possíveis
-    'w': (-1, 0),  # cima
-    's': (1, 0),  # baixo
-    'a': (0, -1),  # esquerda
-    'd': (0, 1)  # direita
-}
 
 inicio = encontrar_posicao(mapa, 'S')  # encontra a posição inicial
 objetivo = encontrar_posicao(mapa, 'T')  # encontra a posição do objetivo
