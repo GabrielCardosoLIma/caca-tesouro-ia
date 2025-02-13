@@ -15,7 +15,8 @@ def encontrar_posicao(Mapa, X):  # função para encontrar a posição de um ele
     return None  # se o elemento não foi encontrado
 
 def mostrar_mapa(mapa):  # função para exibir o mapa
-
+    for linha in mapa:
+        print(" ".join(linha))
 
 def busca_largura(mapa, inicio, objetivo):  # função para realizar a busca em largura
 
