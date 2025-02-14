@@ -23,26 +23,33 @@ def mostrar_mapa(mapa):  # função para exibir o mapa
 def busca(mapa, inicio, objetivo):  # função para realizar a busca simples
     #Lista de todos os movimentos possiveis
     movimentos = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-    caminho = [] # guarda o caminho percorrido
-    atual = inicio #busca apartir da posição inicial
+    caminho = [inicio] # começa da posição inicial
+    visitados = set([inicio]) #conjunto de visitados
+    visitados.add(inicio)  # marca a posição inicial como visitada
 
-    while atual != objetivo: #busca ate seu objetivo
-        avancou = False #saber se avançou
+
+    while caminho: 
+        atual = caminho[-1] #ultima posição
+        if atual == objetivo: #se atingiu o objetivo retorna o caminho
+            return caminho
+
         for mov in movimentos: # percorre movimentos
             nova_posicao = (atual[0] + mov[0], atual[1] + mov[1]) # nova posição
         
             # se posição esta de acordo com o limite do mapa
-            if 0 <= nova_posicao[0] < len(mapa) and 0 <= nova_posição[1] < len(mapa[0]):
-                if mapa[nova_posicao[0]][nova_posicao[1]] != '#': # verifica se não é parede
+            if 0 <= nova_posicao[0] < len(mapa) and 0 <= nova_posicao[1] < len(mapa[0]):
+                if mapa[nova_posicao[0]][nova_posicao[1]] != '#' and nova_posicao not in visitados: # verifica se não é parede
                     caminho.append(nova_posicao) # add nova posição
-                    atual = nova_posicao 
-                    avancou = True # é possivel avançar
+                    visitados.add(nova_posicao) # marca como visitado
                     break
                 
-        if not avancou:# não conseguiu avançar, bloqueado
-            return None # não caminho possivel
+        else:
+            caminho.pop() # não conseguiu mover
 
-    return caminho # retorna caminho encontrado
+    return None # se não encontrou o objetivo
+
+mapa = mapa_json("mapa.json") 
+
 
 inicio = encontrar_posicao(mapa, 'S')  # encontra a posição inicial
 objetivo = encontrar_posicao(mapa, 'T')  # encontra a posição do objetivo
