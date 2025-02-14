@@ -20,40 +20,34 @@ def mostrar_mapa(mapa):  # função para exibir o mapa
         print(" ".join(linha))
     print("\n\n") 
 
-def busca_largura(mapa, inicio, objetivo):  # função para realizar a busca em largura
+def busca(mapa, inicio, objetivo):  # função para realizar a busca simples
     #Lista de todos os movimentos possiveis
     movimentos = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    caminho = [] # guarda o caminho percorrido
+    atual = inicio #busca apartir da posição inicial
 
-    fila = deque()  # Cria uma fila para a BFS
-    fila.append((inicio, []))  # Adiciona a posição inicial e o caminho até ela
-    visitados = set()  # Conjunto para armazenar posições já visitadas
-    visitados.add(inicio)  
-
-    while fila:
-        (atual, caminho) = fila.popleft()  # Retira o primeiro da fila
+    while atual != objetivo: #busca ate seu objetivo
+        avancou = False #saber se avançou
+        for mov in movimentos: # percorre movimentos
+            nova_posicao = (atual[0] + mov[0], atual[1] + mov[1]) # nova posição
         
-        # Se encontramos o objetivo, retornamos o caminho
-        if atual == objetivo:
-            return caminho + [atual]
+            # se posição esta de acordo com o limite do mapa
+            if 0 <= nova_posicao[0] < len(mapa) and 0 <= nova_posição[1] < len(mapa[0]):
+                if mapa[nova_posicao[0]][nova_posicao[1]] != '#': # verifica se não é parede
+                    caminho.append(nova_posicao) # add nova posição
+                    atual = nova_posicao 
+                    avancou = True # é possivel avançar
+                    break
+                
+        if not avancou:# não conseguiu avançar, bloqueado
+            return None # não caminho possivel
 
-        # Testamos os movimentos possíveis
-        for mov in movimentos:
-            nova_posicao = (atual[0] + mov[0], atual[1] + mov[1])
-            
-            # Verifica se está dentro dos limites do mapa
-            if 0 <= nova_posicao[0] < len(mapa) and 0 <= nova_posicao[1] < len(mapa[0]):
-                # Verifica se não é parede ('#') e se não foi visitado
-                if mapa[nova_posicao[0]][nova_posicao[1]] != '#' and nova_posicao not in visitados:
-                    fila.append((nova_posicao, caminho + [atual]))
-                    visitados.add(nova_posicao)
-    
-    return None #Caso nao tenha caminho retorna None
-
+    return caminho # retorna caminho encontrado
 
 inicio = encontrar_posicao(mapa, 'S')  # encontra a posição inicial
 objetivo = encontrar_posicao(mapa, 'T')  # encontra a posição do objetivo
 
-caminho = busca_largura(mapa, inicio, objetivo) 
+caminho = busca(mapa, inicio, objetivo) 
 
 
 if caminho:  # Se um caminho foi encontrado
