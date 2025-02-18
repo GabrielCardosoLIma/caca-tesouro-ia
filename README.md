@@ -1,7 +1,9 @@
 # *Caça ao Tesouro*  
 
+## Grupo: Gabriel Cardoso, Guilherme Maia, Emilly Bo e Izabelle Oliveira
+
 ## *Atividade 1: Introdução à Busca*  
-### *Aula 1 – Aprendizado de Máquina e Inteligência Artificial*  
+### *Aula 1 – Aprendizado de Máquina e Inteligência Artificial*
 
 ### *Descrição*  
 Desenvolver um programa que ajude um "caçador de tesouros" a encontrar um caminho da sua posição inicial até o tesouro em uma grade 2D.  
