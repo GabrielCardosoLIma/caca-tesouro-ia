@@ -1,5 +1,4 @@
-import json  
-from collections import deque
+import json
 
 def mapa_json(arquivo):  # função para ler o mapa de um arquivo JSON
     with open(arquivo, 'r') as f:  
@@ -8,7 +7,7 @@ def mapa_json(arquivo):  # função para ler o mapa de um arquivo JSON
 
 mapa = mapa_json("mapa.json") #função para ler o mapa do arquivo "mapa.json"
 
-def encontrar_posicao(Mapa, X):  # função para encontrar a posição de um elemento no mapa
+def encontrar_posicao(mapa, X):  # função para encontrar a posição de um elemento no mapa
     for i in range(len(mapa)):  # linhas 
         for j in range(len(mapa[i])):  # colunas do mapa
             if mapa[i][j] == X:  # se o elemento foi encontrado
